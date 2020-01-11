@@ -11,6 +11,7 @@ export interface HomeStyles {
   sectionDescription: TextStyle;
   highlight: TextStyle;
   footer: ViewStyle;
+  linearGradient: ViewStyle;
 }
 
 export default StyleSheet.create<HomeStyles>({
@@ -49,5 +50,11 @@ export default StyleSheet.create<HomeStyles>({
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
   },
 });
