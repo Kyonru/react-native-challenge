@@ -2,19 +2,21 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import HomeScreen from 'src/screens/home';
-import ResultListScreen from 'src/screens/result-list';
+import CocktailListScreen from 'src/screens/cocktail-list';
+import {ScreenName} from 'src/navigation/screens';
 
 const AppNavigator = createStackNavigator(
   {
-    Home: {
+    [ScreenName.home]: {
       screen: HomeScreen,
     },
-    ResultList: {
-      screen: ResultListScreen,
+    [ScreenName.cocktailList]: {
+      screen: CocktailListScreen,
     },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: ScreenName.home,
+    headerMode: 'none',
   },
 );
 
