@@ -1,16 +1,12 @@
-import {StackActions, NavigationActions} from 'react-navigation';
+import {StackActions} from 'react-navigation';
 import {NavigationStackProp} from 'react-navigation-stack';
-import {debounce} from 'src/utils/timers';
 
 export enum ScreenName {
   home = 'Home',
   cocktailList = 'CocktailList',
 }
 
-export const openCocktailSearchScreen = (
-  navigator: NavigationStackProp,
-  key: string = ScreenName.cocktailList,
-) => {
+export const openCocktailSearchScreen = (navigator: NavigationStackProp) => {
   navigator.dispatch(
     StackActions.push({
       routeName: ScreenName.cocktailList,

@@ -4,4 +4,6 @@ export default {
   cinnabar: '#e43e2e',
   redViolet: '#c81492',
   white: '#ffffff',
+  spunPearl: '#a8a7ab',
+  mineShaft: '#323232',
 };

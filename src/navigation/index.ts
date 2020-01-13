@@ -1,5 +1,5 @@
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import {createStackNavigator, TransitionPresets} from 'react-navigation-stack';
 
 import HomeScreen from 'src/screens/home';
 import CocktailListScreen from 'src/screens/cocktail-list';
@@ -17,6 +17,10 @@ const AppNavigator = createStackNavigator(
   {
     initialRouteName: ScreenName.home,
     headerMode: 'none',
+    defaultNavigationOptions: {
+      ...TransitionPresets.SlideFromRightIOS,
+      gestureEnabled: false,
+    },
   },
 );
 

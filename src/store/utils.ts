@@ -1,10 +1,10 @@
 import {StoreReducerAction} from 'src/@types/store';
 
-export function createReduxAction<S>(type: string, payload: S) {
-  return {
+export function createReduxAction<S>(type: string, payload?: any): S {
+  return ({
     payload,
     type,
-  };
+  } as unknown) as S;
 }
 
 export class ReducerActionMapper<T> {

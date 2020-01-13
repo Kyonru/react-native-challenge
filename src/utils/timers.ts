@@ -1,12 +1,4 @@
-let active = false;
-export const debounce = (method: () => any, limit = 300) => {
-  if (active) {
-    return;
-  }
-  active = true;
-  method();
+import debounce from 'lodash.debounce';
 
-  setTimeout(() => {
-    active = false;
-  }, limit);
-};
+export const witDebounce = (method: () => any, limit = 500) =>
+  debounce(method, limit, {leading: true, trailing: false});

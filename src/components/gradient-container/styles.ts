@@ -1,15 +1,22 @@
-import {StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {StyleSheet, ViewStyle, Platform} from 'react-native';
+import colors from 'src/resources/theme/colors';
 
-export interface HomeStyles {
+export interface GradientContainerStyles {
   container: ViewStyle;
   linearGradient: ViewStyle;
+  statusBar: ViewStyle;
 }
 
-export default StyleSheet.create<HomeStyles>({
-  container: {flex: 1},
+export default StyleSheet.create<GradientContainerStyles>({
+  container: {
+    flex: 1,
+  },
   linearGradient: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingHorizontal: 16,
+  },
+  statusBar: {
+    height: Platform.OS === 'ios' ? 40 : 0,
+    backgroundColor: colors.white,
   },
 });

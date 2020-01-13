@@ -5,17 +5,21 @@ import {NavigationStackProp} from 'react-navigation-stack';
 import Logo from 'src/components/logo';
 import GradientContainer from 'src/components/gradient-container/index';
 
-import styles from './styles';
 import SearchButton from 'src/components/buttons/search';
 import {openCocktailSearchScreen} from 'src/navigation/screens';
+import {witDebounce} from 'src/utils/timers';
+import styles from './styles';
+import colors from 'src/resources/theme/colors';
 
-const App = (props: {navigation: NavigationStackProp}) => {
+const Home = (props: {navigation: NavigationStackProp}) => {
   return (
-    <GradientContainer>
+    <GradientContainer statusBarBackgroundColor={colors.redViolet}>
       <View style={styles.container}>
         <Logo />
         <SearchButton
-          onPress={() => openCocktailSearchScreen(props.navigation)}
+          onPress={witDebounce(() =>
+            openCocktailSearchScreen(props.navigation),
+          )}
           containerStyle={styles.button}
         />
       </View>
@@ -23,4 +27,4 @@ const App = (props: {navigation: NavigationStackProp}) => {
   );
 };
 
-export default App;
+export default Home;
