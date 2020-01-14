@@ -10,7 +10,7 @@ Before downloading the repo:
 On your console, run:
 Inside the repo folder install the dependencies by running:
 ```bash
-git clone git@github.com:Kyonru/foxbox-react-native-challenge.git
+git clone git@github.com:Kyonru/react-native-challenge.git
 ```
 
 #### Installing dependencies 
