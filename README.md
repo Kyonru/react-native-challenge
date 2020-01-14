@@ -1,7 +1,7 @@
 # React Native Challenge
 
 Before downloading the repo:
-- [mMake sure you have React Native CLI configured](https://facebook.github.io/react-native/docs/getting-started).
+- [Make sure you have React Native CLI configured](https://facebook.github.io/react-native/docs/getting-started).
 - [Yarn installed](https://yarnpkg.com/lang/en/docs/install)
 
 ## Before Running the app
