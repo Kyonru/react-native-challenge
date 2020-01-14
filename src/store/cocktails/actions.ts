@@ -22,7 +22,7 @@ export function getCocktailList(searchTerm: string) {
       dispatch(createReduxAction<SetCocktails>(SET_COCKTAILS, cocktails));
       return cocktails;
     } catch (e) {
-      // TODO: set error
+      dispatch(createReduxAction<SetCocktails>(SET_COCKTAILS, []));
       return [];
     }
   };
@@ -42,7 +42,7 @@ export function setSearchTerm(searchTerm: string) {
       dispatch(createReduxAction<SetSearchTerm>(SET_SEARCH_TERM, searchTerm));
       return searchTerm;
     } catch (e) {
-      // TODO: set error
+      dispatch(createReduxAction<SetSearchTerm>(SET_SEARCH_TERM, ''));
       return '';
     }
   };

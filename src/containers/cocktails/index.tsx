@@ -81,23 +81,25 @@ class CocktailListContainer extends React.Component<
   };
 
   render() {
+    const loading = this.state.isTyping || this.props.isLoading;
     return (
       <>
-        <ActivityIndicator
-          hidesWhenStopped
-          animating={this.state.isTyping || this.props.isLoading}
-          size={'large'}
-          color={colors.magicMint}
-          style={StyleSheet.flatten([
-            styles.loadingIndicator,
-            {
-              display:
-                this.state.isTyping || this.props.isLoading ? 'flex' : 'none',
-            },
-          ])}
-        />
+        {loading ? (
+          <ActivityIndicator
+            hidesWhenStopped
+            animating={loading}
+            size={'large'}
+            color={colors.magicMint}
+            style={StyleSheet.flatten([
+              styles.loadingIndicator,
+              {
+                display: loading ? 'flex' : 'none',
+              },
+            ])}
+          />
+        ) : null}
         <FlatList
-          refreshing={this.props.isLoading || this.state.isTyping}
+          refreshing={loading}
           ListEmptyComponent={this.renderEmptyState}
           refreshControl={
             <RefreshControl
