@@ -10,4 +10,4 @@ export const get = <T>(endpoint: string, params: {[key: string]: string}) =>
       endpoint,
       params,
     }),
-  );
+  ).then(r => r.json());

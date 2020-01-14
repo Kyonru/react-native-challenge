@@ -1,12 +1,20 @@
 import React from 'react';
-import {FlatList, RefreshControl} from 'react-native';
+import {
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 
 import {Store} from 'src/@types/store';
 import {Cocktail} from 'src/@types/cocktails';
 
-import {getCocktailList as getCocktails} from 'src/store/cocktails/actions';
+import {
+  getCocktailList as getCocktails,
+  startLoading,
+} from 'src/store/cocktails/actions';
 import {
   getCocktailList,
   getSearchTerm,
@@ -15,45 +23,96 @@ import {
 import {CocktailsActions} from 'src/store/cocktails/types';
 
 import CocktailListItem from 'src/components/list-item/cocktail';
+import EmptyState from 'src/components/empty-state';
 import colors from 'src/resources/theme/colors';
+import {witDebounce} from 'src/utils/timers';
+
+import styles from './styles';
 
 interface CocktailListProps {
   cocktails: Cocktail[];
   searchTerm: string;
   isLoading: boolean;
   getCocktails(value: string): Promise<Cocktail[]>;
+  startLoading(): Promise<any>;
 }
 
-class CocktailListContainer extends React.Component<CocktailListProps> {
+class CocktailListContainer extends React.Component<
+  CocktailListProps,
+  {isTyping: boolean}
+> {
+  state = {
+    isTyping: false,
+  };
+  timeout: any;
+
   componentDidUpdate(pastProps: CocktailListProps) {
     if (pastProps.searchTerm !== this.props.searchTerm) {
-      this.props.getCocktails(this.props.searchTerm);
+      this.setState({isTyping: true});
+      this.onRefresh();
     }
   }
 
-  onRefresh = () => {
-    this.props.getCocktails(this.props.searchTerm);
-  };
+  onRefresh = witDebounce(
+    async () => {
+      await this.props.getCocktails(this.props.searchTerm);
+      this.setState({isTyping: false});
+    },
+    1000,
+    false,
+    true,
+  );
 
   renderCocktail = ({item}: {item: Cocktail}) => {
     return <CocktailListItem {...item} />;
   };
 
+  renderEmptyState = () => {
+    if (this.state.isTyping) {
+      return null;
+    }
+
+    return (
+      <EmptyState
+        term={this.props.searchTerm}
+        firstRender={!this.props.searchTerm}
+      />
+    );
+  };
+
   render() {
     return (
-      <FlatList
-        refreshControl={
-          <RefreshControl
-            refreshing={this.props.isLoading}
-            onRefresh={this.onRefresh}
-            tintColor={colors.white}
-            colors={[colors.cinnabar]}
-          />
-        }
-        data={this.props.cocktails}
-        renderItem={this.renderCocktail}
-        keyExtractor={item => `${item.id}`}
-      />
+      <>
+        <ActivityIndicator
+          hidesWhenStopped
+          animating={this.state.isTyping || this.props.isLoading}
+          size={'large'}
+          color={colors.magicMint}
+          style={StyleSheet.flatten([
+            styles.loadingIndicator,
+            {
+              display:
+                this.state.isTyping || this.props.isLoading ? 'flex' : 'none',
+            },
+          ])}
+        />
+        <FlatList
+          refreshing={this.props.isLoading || this.state.isTyping}
+          ListEmptyComponent={this.renderEmptyState}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={this.onRefresh}
+              tintColor={colors.magicMint}
+              colors={[colors.magicMint]}
+            />
+          }
+          extraData={[this.props, this.state.isTyping]}
+          data={this.props.cocktails}
+          renderItem={this.renderCocktail}
+          keyExtractor={item => `${item.id}`}
+        />
+      </>
     );
   }
 }
@@ -66,6 +125,7 @@ const mapStateToProps = (state: Store) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<CocktailsActions>) => ({
   getCocktails: (value: string) => getCocktails(value)(dispatch),
+  startLoading: () => startLoading()(dispatch),
 });
 
 export default connect(

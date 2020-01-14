@@ -6,4 +6,5 @@ export default {
   white: '#ffffff',
   spunPearl: '#a8a7ab',
   mineShaft: '#323232',
+  magicMint: '#26CF45',
 };

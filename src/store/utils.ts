@@ -4,7 +4,7 @@ export function createReduxAction<S>(type: string, payload?: any): S {
   return ({
     payload,
     type,
-  } as unknown) as S;
+  } as any) as S;
 }
 
 export class ReducerActionMapper<T> {

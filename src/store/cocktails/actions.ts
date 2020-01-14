@@ -5,7 +5,7 @@ import {
   FetchCocktails,
 } from 'src/store/cocktails/types';
 import {createReduxAction} from 'src/store/utils';
-import {getCocktails} from 'src/services/api/sources/cocktails.mocks';
+import {getCocktails} from 'src/services/api/sources/cocktails';
 import {Cocktail} from 'src/@types/cocktails';
 import {
   SetCocktails,
@@ -17,16 +17,22 @@ import {
 export function getCocktailList(searchTerm: string) {
   return async (dispatch: Dispatch<CocktailsActions>): Promise<Cocktail[]> => {
     try {
-      console.log('magic');
       dispatch(createReduxAction<FetchCocktails>(FETCH_COCKTAILS));
       const cocktails = await getCocktails(searchTerm);
-      console.log({cocktails});
       dispatch(createReduxAction<SetCocktails>(SET_COCKTAILS, cocktails));
       return cocktails;
     } catch (e) {
       // TODO: set error
       return [];
     }
+  };
+}
+
+export function startLoading() {
+  return async (
+    dispatch: Dispatch<CocktailsActions>,
+  ): Promise<FetchCocktails> => {
+    return dispatch(createReduxAction<FetchCocktails>(FETCH_COCKTAILS));
   };
 }
 

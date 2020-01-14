@@ -4,4 +4,6 @@ export interface I18n {
   finder: string;
   search: string;
   searchFavorite: string;
+  typeSomething: string;
+  notFound: string;
 }

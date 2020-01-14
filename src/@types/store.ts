@@ -14,6 +14,7 @@ export interface CocktailsState {
   loading: boolean;
   cocktails: Cocktail[];
   search: string;
+  error?: any;
 }
 
 export type StoreReducerAction<T> = {

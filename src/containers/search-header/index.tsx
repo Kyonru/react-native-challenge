@@ -37,6 +37,7 @@ class SearchHeader extends React.Component<SearchHeaderProps> {
             style={styles.searchIcon}
           />
           <TextInput
+            autoFocus
             value={value}
             onChangeText={onSearchChange}
             underlineColorAndroid={'transparent'}

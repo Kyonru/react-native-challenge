@@ -6,4 +6,6 @@ export default <I18n>{
   finder: 'Finder',
   search: 'Search',
   searchFavorite: 'Search your favorite cocktail',
+  typeSomething: 'Type something!!',
+  notFound: 'No cocktails found named:',
 };
