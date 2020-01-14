@@ -53,6 +53,8 @@ Anyway, on the project folder do:
 
 All the dependencies added to the project are:
 
+`typescript`: because I like it.
+
 Needed for navigation:
 - `@react-native-community/masked-view`
 - `react-native-gesture-handler`
@@ -84,7 +86,7 @@ As it was requested in the requirements I used `redux`/`react-redux`. But I adde
 
 1. Using libraries focused on high amount of data like:
 - [recyclerlistview](https://github.com/Flipkart/recyclerlistview)
-- [fast-image](https://github.com/DylanVann/react-native-fast-image), enabling caching
+- [fast-image](https://github.com/DylanVann/react-native-fast-image) -> configuring caching
 2. Change the search to be used with redux, and the selectors to make the memoization and the caching more effective  
 3. Adding Pagination / Infinity scroll
 4. Waiting for the user to finish writting before making an api call (Which I'm doing in this challenge 😊)
